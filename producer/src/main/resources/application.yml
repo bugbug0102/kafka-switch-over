@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+kafka:
+  primary:
+    bootstrap-servers: kafka1:9092
+  secondary:
+    bootstrap-servers: kafka2:9092

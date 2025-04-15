@@ -1,0 +1,11 @@
+spring:
+  kafka:
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+kafka:
+  primary:
+    bootstrap-servers: kafka1:9092
+  secondary:
+    bootstrap-servers: kafka2:9092
