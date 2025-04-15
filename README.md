@@ -23,8 +23,8 @@ The `kafka-switch-over` project is a Spring Boot application with Gradle, design
 
 The system is designed to showcase a producer-consumer pattern with Kafka, where the producer can dynamically switch between two Kafka clusters. Below is the architecture diagram:
 
-```
-C4Context
+```plantuml
+@startuml C4_Elements
 AddRelTag("backup", $textColor="orange", $lineColor="orange", $lineStyle = DashedLine())
 
 System(Producer, "Producer", "Generate messages per second")
@@ -38,6 +38,7 @@ Rel(Producer, KafkaB, "Send messages selectively", $tags="backup")
 
 Rel(KafkaA, Consumer, "Consume messages")
 Rel(KafkaB, Consumer, "Consume messages")
+@enduml
 ```
 
 ### Components
