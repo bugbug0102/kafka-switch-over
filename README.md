@@ -23,39 +23,8 @@ The `kafka-switch-over` project is a Spring Boot application with Gradle, design
 
 The system is designed to showcase a producer-consumer pattern with Kafka, where the producer can dynamically switch between two Kafka clusters. Below is the architecture diagram:
 
-```plantuml
-@startuml C4_Elements
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-AddRelTag("backup", $textColor="orange", $lineColor="orange", $lineStyle = DashedLine())
+![alt text](https://github.com/bugbug0102/kafka-switch-over/raw/main/images/diagram.png "Design")
 
-System(Producer, "Producer", "Generate messages per second")
-System(Consumer, "Consumer", "Resume messages from connected Kafka")
-
-System(KafkaA, "Kafka cluster A", "")
-System(KafkaB, "Kafka cluster B", "")
-
-Rel(Producer, KafkaA, "Send messages")
-Rel(Producer, KafkaB, "Send messages selectively", $tags="backup")
-
-Rel(KafkaA, Consumer, "Consume messages")
-Rel(KafkaB, Consumer, "Consume messages")
-@enduml
-```
-
-```plantuml
-@startuml Basic Sample
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-
-Person(admin, "Administrator")
-System_Boundary(c1, "Sample System") {
-    Container(web_app, "Web Application", "C#, ASP.NET Core 2.1 MVC", "Allows users to compare multiple Twitter timelines")
-}
-System(twitter, "Twitter")
-
-Rel(admin, web_app, "Uses", "HTTPS")
-Rel(web_app, twitter, "Gets tweets from", "HTTPS")
-@enduml
-```
 
 ### Components
 - **Producer**:
@@ -161,24 +130,28 @@ KafkaB -->|consume| Consumer
 ## Usage
 1. **Sending Messages**:
 
-    The producer automatically sends messages to org.b0102.one.event on kafka1:9092 every second. No manual intervention is required to start producing messages.
+    The producer automatically sends messages to `org.b0102.one.event` on `kafka1:9092` every second. No manual intervention is required to start producing messages.
 
 
 2. **Switching Kafka Cluster**:
 
-    To switch the producer to the secondary cluster (kafka2:9092), call the REST API:
+    To switch the producer to the secondary cluster (`kafka2:9092`), call the REST API:
 
    ```bash
    curl -X POST http://localhost:8080/v1/switch-over
    ```
 
    + Response: "Switched to secondary Kafka cluster"
-   + Effect: The producer starts sending messages to kafka2:9092.
+   + Effect: The producer starts sending messages to `kafka2:9092`.
    + Consumer Logs: You’ll see messages like:
 
    ```text
    Received : <counter_value> (PRIMARY|SECONDARY)
    ```
+## Demo
+
+[Video](https://youtu.be/G2nko6GM1Ho)
+
 
 ## License
 
