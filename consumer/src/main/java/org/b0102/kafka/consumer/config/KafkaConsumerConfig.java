@@ -43,7 +43,7 @@ class KafkaConsumerConfig {
     return new DefaultKafkaConsumerFactory<>(props);
   }
 
-  @Bean("listener.primary")
+  @Bean
   @Primary
   ConcurrentKafkaListenerContainerFactory<String, String> primaryKafkaListenerContainerFactory() {
     final ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
@@ -57,4 +57,5 @@ class KafkaConsumerConfig {
     factory.setConsumerFactory(secondaryConsumerFactory());
     return factory;
   }
+
 }

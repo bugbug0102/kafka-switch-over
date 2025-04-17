@@ -10,8 +10,8 @@ class ConsumerService {
 
   private static Logger logger = LoggerFactory.getLogger(ConsumerService.class);
 
-  @KafkaListener(topics = "org.b0102.one.event", containerFactory = "listener.primary")
-  @KafkaListener(topics = "org.b0102.one.event", containerFactory = "listener.secondary")
+  @KafkaListener(topics = "org.b0102.one.event", groupId = "consumer")
+  //@KafkaListener(topics = "org.b0102.one.event", containerFactory = "listener.secondary")
   public void consume(String message) {
     logger.info("Received : {}", message);
   }
